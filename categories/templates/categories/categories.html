@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>categories</title>
+</head>
+<body>
+<ul>
+    {%for category in categories%}
+    <li><a href="/categories/{{category.id}}/">{{category}}
+    </a></li>
+    {%endfor%}
+</ul>
+</body>
+</html>
