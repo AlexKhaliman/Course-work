@@ -6,7 +6,7 @@
 </head>
 <body>
     {%for category in categories%}
-        <a href="/categories/{{category.id}}/"><img src="{{category.picture}}"></a>
+        <a href="/categories/{{category.id}}/"><img src="{{ category.picture.url }}"></a>
     {%endfor%}
 </body>
 </html>
