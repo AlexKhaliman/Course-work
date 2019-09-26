@@ -5,11 +5,8 @@
     <title>categories</title>
 </head>
 <body>
-<ul>
     {%for category in categories%}
-    <li><a href="/categories/{{category.id}}/">{{category}}
-    </a></li>
+        <a href="/categories/{{category.id}}/"><img src="{{category.picture}}"></a>
     {%endfor%}
-</ul>
 </body>
 </html>

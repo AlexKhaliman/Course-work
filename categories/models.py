@@ -6,6 +6,7 @@ from enum import Enum
 
 class Categories(models.Model):
     category = models.CharField(max_length=30)
+    picture = models.ImageField(blank=True, null=True, upload_to='static/img/')
 
     def __str__(self):
         return self.category
@@ -25,7 +26,7 @@ class TaskStatus(Enum):
 
 
 class Tasks(models.Model):
-    task = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     pub_date = models.DateTimeField(default=datetime.now)
     comments = models.CharField(max_length=1000, blank=True)
     status = models.CharField(max_length=30, choices=TaskStatus.get_choices(), default='looking for executor')
@@ -33,4 +34,4 @@ class Tasks(models.Model):
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.task
+        return self.name
