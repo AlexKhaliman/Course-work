@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 
-from .models import Categories
+from .models import Categories, Tasks
+
+from datetime import datetime
 
 
 def get_categories(request):
@@ -14,8 +16,19 @@ def get_categories(request):
 
 
 def get_tasks(request, category_id):
-    task = Categories.objects.get(pk=category_id)
+    cat = Categories.objects.get(pk=category_id)
+    tasks = Tasks.objects.filter(category=cat)
+
     context = {
-        'task': task
+        'tasks': tasks,
+        'category_id': category_id,
     }
     return render(request, 'categories/tasks.html', context)
+
+
+def get_details(request, category_id, task_id):
+    task = Tasks.objects.get(pk=task_id)
+    context = {
+        "task": task
+    }
+    return render(request, 'categories/details.html', context)

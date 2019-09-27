@@ -27,7 +27,7 @@ class TaskStatus(Enum):
 
 class Tasks(models.Model):
     name = models.CharField(max_length=100)
-    pub_date = models.DateTimeField(default=datetime.now)
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
     comments = models.CharField(max_length=1000, blank=True)
     status = models.CharField(max_length=30, choices=TaskStatus.get_choices(), default='looking for executor')
     price = models.PositiveIntegerField()

@@ -5,6 +5,11 @@
     <title>tasks</title>
 </head>
 <body>
-{{task}}
+    <ul>
+        {%for task in tasks%}
+        <li> {{task.name}} {{task.price}} создано:{{ task.pub_date}} <a href="/categories/{{category_id}}/{{task.id}}"> подробнее</a> </li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>
