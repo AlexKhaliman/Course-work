@@ -3,12 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>details</title>
+    {% extends "actions/main.html" %}
+
 </head>
 <body>
+
+{% block content %}
 <ul>
     <li>{{task}}</li>
     <li>{{task.price}}</li>
     <li>{{task.comments}}</li>
 </ul>
+{% endblock %}
 </body>
 </html>
