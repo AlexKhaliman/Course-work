@@ -18,12 +18,10 @@ def get_categories(request):
 def get_tasks(request, category_id):
     cat = Categories.objects.get(pk=category_id)
     tasks = Tasks.objects.filter(category=cat)
-
-    context = {
+    return render(request, 'categories/tasks.html', context={
         'tasks': tasks,
         'category_id': category_id,
-    }
-    return render(request, 'categories/tasks.html', context)
+    })
 
 
 def get_details(request, category_id, task_id):
