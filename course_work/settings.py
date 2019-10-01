@@ -83,11 +83,9 @@ DATABASES = {
         'NAME': 'service_db',
     },
 }
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-
-
-# Password validation
-# https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
+AUTH_USER_MODEL = 'actions.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -129,3 +127,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
 ]
+
+EMAIL_HOST = 'smtp@gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'admin@gmail.com'
