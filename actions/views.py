@@ -1,14 +1,18 @@
+from django.views.decorators.http import require_GET
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
 from actions.register_form import RegistrationForm
 from actions.models import User
-from django.views.decorators.http import require_GET
+from actions.add_category_form import AddingForm
 
 
 def create_task(request):
-    return HttpResponse('Здесь должна быть форма заполнения')
+    form = AddingForm(request.POST)
+    return render(request, 'actions/add_task.html', context={
+        'form': AddingForm
+    })
 
 
 def welcome(request):
