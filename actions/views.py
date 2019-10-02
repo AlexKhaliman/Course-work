@@ -9,10 +9,17 @@ from actions.add_category_form import AddingForm
 
 
 def create_task(request):
-    form = AddingForm(request.POST)
-    return render(request, 'actions/add_task.html', context={
-        'form': AddingForm
-    })
+
+    if request.method == 'GET':
+        return render(request, 'actions/add_task.html', context={
+            'form': AddingForm()
+        })
+
+    elif request.method == 'POST':
+        form = AddingForm(request.POST)
+        if form.is_valid():
+            form.save()
+            redirect('/')
 
 
 def welcome(request):
