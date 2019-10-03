@@ -2,6 +2,7 @@ from django.db import models
 
 from datetime import datetime
 from enum import Enum
+from actions.models import User
 
 
 class Categories(models.Model):
@@ -32,6 +33,7 @@ class Tasks(models.Model):
     status = models.CharField(max_length=30, choices=TaskStatus.get_choices(), default='looking for executor')
     price = models.PositiveIntegerField()
     category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

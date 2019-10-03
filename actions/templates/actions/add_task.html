@@ -6,8 +6,17 @@
 </head>
 <body>
     <form method="POST" action="/creating/">
-    {% csrf_token %}
-    {{ form }}
+        {% csrf_token %}
+        <style>
+        .hide {visibility: hidden;}
+        </style>
+            <div class="hide">
+        {{ form.created_by }}
+            </div>
+        name: {{ form.name }}
+        price: {{ form.price }}
+        category: {{ form.category }}
+        comments: {{ form.comments }}
     <input type="submit">
     </form>
 </body>

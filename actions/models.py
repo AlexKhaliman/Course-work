@@ -4,7 +4,6 @@ import base64
 import urllib
 
 from django.core.signing import Signer
-
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 

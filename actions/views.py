@@ -3,23 +3,25 @@ from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 
+from actions.add_category_form import AddingForm
 from actions.register_form import RegistrationForm
 from actions.models import User
-from actions.add_category_form import AddingForm
+from categories.models import Tasks
 
 
 def create_task(request):
 
     if request.method == 'GET':
         return render(request, 'actions/add_task.html', context={
-            'form': AddingForm()
+            'form': AddingForm(initial={'created_by': request.user.id})
         })
 
     elif request.method == 'POST':
         form = AddingForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect('/')
+            return redirect('/')
+        return form.errors.as_data()
 
 
 def welcome(request):
