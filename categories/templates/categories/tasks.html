@@ -10,7 +10,7 @@
 {%if tasks|length > 0%}
     <ul>
         {%for task in tasks%}
-        <li> {{task.name}} {{task.price}} создано:{{ task.pub_date}} <a href="/categories/{{category_id}}/{{task.id}}"> подробнее</a> </li>
+        <li> {{task.name}} {{task.price}} создано:{{ task.pub_date}} <a href="/categories/{{category_id}}/{{task.id}}"> подробнее...</a> </li>
         {% endfor %}
     </ul>
 {%else%}

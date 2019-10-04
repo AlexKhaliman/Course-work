@@ -10,10 +10,11 @@
 
 {% block content %}
 <ul>
-    <li>{{task}}</li>
-    <li>{{task.price}}</li>
-    <li>{{task.comments}}</li>
+    <li>{{ task.name }}</li>
+    <li>{{ task.price }}</li>
+    <li>{{ task.comments }}</li>
 </ul>
+<a href="to_respond/">Откликнуться!</a>
 {% endblock %}
 </body>
 </html>

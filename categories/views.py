@@ -16,7 +16,7 @@ def get_categories(request):
 
 
 def get_tasks(request, category_id):
-    cat = Categories.objects.get(pk=category_id)
+    cat = Categories.objects.get(id=category_id)
     tasks = Tasks.objects.filter(category=cat)
     return render(request, 'categories/tasks.html', context={
         'tasks': tasks,
@@ -25,8 +25,10 @@ def get_tasks(request, category_id):
 
 
 def get_details(request, category_id, task_id):
-    task = Tasks.objects.get(pk=task_id)
-    context = {
-        "task": task
-    }
-    return render(request, 'categories/details.html', context)
+    task = Tasks.objects.get(id=task_id)
+    return render(request, 'categories/details.html', context={"task": task})
+
+
+def to_respond(request, category_id, task_id):
+    task = Tasks.objects.get(id=task_id)
+    return render(request, 'categories/to_respond.html', context={'task': task})

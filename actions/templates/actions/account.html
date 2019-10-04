@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>account</title>
+    {% extends "actions/main.html" %}
+</head>
+<body>
+{% block content %}
+    Ваши объявления:
+<table>
+    {% for task in tasks %}
+      <tr>
+        <td> {{task.name}} </td><td>{{task.price}}</td><td>{{task.status}}</td>
+          <td><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
+      </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+</body>
+</html>

@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from actions.add_category_form import AddingForm
 from actions.register_form import RegistrationForm
 from actions.models import User
-from categories.models import Tasks
+from categories.models import Tasks, Categories
 
 
 def create_task(request):
@@ -20,8 +20,7 @@ def create_task(request):
         form = AddingForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/')
-        return form.errors.as_data()
+        return redirect('/')
 
 
 def welcome(request):
@@ -55,8 +54,12 @@ def logout_view(request):
     return redirect("/")
 
 
-def account(request):
-    return HttpResponse('личный кабинет')
+def account(request, user_id):
+
+    tasks = Tasks.objects.filter(created_by=user_id)
+    return render(request, "actions/account.html", context={
+        'tasks': tasks
+    })
 
 
 def register(request):
@@ -84,5 +87,6 @@ def verify_email(request):
         request.user.save()
         return render(request, "actions/account_activated.html")
     return redirect("/")
+
 
 

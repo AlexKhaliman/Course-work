@@ -32,8 +32,7 @@ class Tasks(models.Model):
     comments = models.CharField(max_length=1000, blank=True)
     status = models.CharField(max_length=30, choices=TaskStatus.get_choices(), default='looking for executor')
     price = models.PositiveIntegerField()
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
+    category = models.ForeignKey(Categories, related_name='categories', on_delete=models.CASCADE)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.name
+
