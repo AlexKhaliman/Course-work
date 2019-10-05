@@ -2,11 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>respond</title>
+    <title>Respond</title>
 </head>
 <body>
-<a href="/account/{{task.created_by.id}}/">{{task.created_by.username}}</a>
-    {{task.created_by.email}}
-    <a href="/categories/{{task.category.id}}/">Вернуться</a>
+    <form method="POST">
+        {% csrf_token %}
+        <style>
+            .hide {visibility: hidden}
+        </style>
+            <div class="hide">
+                {{ form.suggested_by }}
+                {{form.task}}
+            </div>
+        Комментарий: {{form.comment}}
+    <input type="submit">
+    </form>
 </body>
 </html>

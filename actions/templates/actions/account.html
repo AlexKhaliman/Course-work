@@ -9,13 +9,21 @@
 {% block content %}
     Ваши объявления:
 <table>
-    {% for task in tasks %}
+    {% for task, amount in tasks %}
       <tr>
         <td> {{task.name}} </td><td>{{task.price}}</td><td>{{task.status}}</td>
           <td><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
+          <td>
+              {% if amount > 0%}
+              <a href="{{task.id}}/offers/">Предложений: {{amount}}</a>
+              {% else %}
+              Предложений нет
+              {% endif%}
+          </td>
       </tr>
     {% endfor %}
 </table>
+
 {% endblock %}
 </body>
 </html>

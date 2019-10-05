@@ -1,0 +1,14 @@
+{% extends "actions/main.html" %}
+{% block content%}
+
+<table>
+    {% for offer in offers%}
+    <tr>
+        <td>{{ offer.suggested_by }}</td>
+        <td>{{ offer.comment }}</td>
+        <td>{{ offer.posted_time }}</td>
+        <td><a href="{{ offer.id }}">Принять!</a></td>
+    </tr>
+    {% endfor%}
+</table>
+{% endblock %}

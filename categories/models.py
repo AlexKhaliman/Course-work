@@ -1,6 +1,7 @@
 from django.db import models
 
-from datetime import datetime
+from django.utils import timezone
+
 from enum import Enum
 from actions.models import User
 
@@ -36,3 +37,8 @@ class Tasks(models.Model):
     created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
+class Offers(models.Model):
+    suggested_by = models.ForeignKey(User, related_name='suggested_by', on_delete=models.CASCADE)
+    task = models.ForeignKey(Tasks, related_name='task', on_delete=models.CASCADE, null=True)
+    comment = models.CharField(max_length=500, blank=True, null=True)
+    posted_time = models.DateTimeField(auto_now_add=True, blank=True)

@@ -1,10 +1,8 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from django.template import loader
+from django.shortcuts import render, redirect
 
+from .models import User
 from .models import Categories, Tasks
-
-from datetime import datetime
+from categories.respond_form import RespondForm
 
 
 def get_categories(request):
@@ -30,5 +28,20 @@ def get_details(request, category_id, task_id):
 
 
 def to_respond(request, category_id, task_id):
-    task = Tasks.objects.get(id=task_id)
-    return render(request, 'categories/to_respond.html', context={'task': task})
+    if request.method == 'GET':
+        task = Tasks.objects.get(id=task_id)
+        print(request.user.id)
+        return render(request, 'categories/to_respond.html', context={
+            'form': RespondForm(initial={
+                'suggested_by': request.user.id,
+                'task': task.id
+            })
+        })
+    elif request.method == 'POST':
+        form = RespondForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+
+

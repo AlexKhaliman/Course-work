@@ -1,12 +1,11 @@
 from django.views.decorators.http import require_GET
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 
 from actions.add_category_form import AddingForm
 from actions.register_form import RegistrationForm
 from actions.models import User
-from categories.models import Tasks, Categories
+from categories.models import Tasks, Categories, Offers
 
 
 def create_task(request):
@@ -55,10 +54,12 @@ def logout_view(request):
 
 
 def account(request, user_id):
-
+    amount_of_offers = []
     tasks = Tasks.objects.filter(created_by=user_id)
+    for task in tasks:
+        amount_of_offers.append((Offers.objects.filter(task=task)).count())
     return render(request, "actions/account.html", context={
-        'tasks': tasks
+        'tasks': zip(tasks, amount_of_offers)
     })
 
 
@@ -89,4 +90,25 @@ def verify_email(request):
     return redirect("/")
 
 
+def accept(request, user_id, task_id, offer_id):
+    user = User.objects.get(id=user_id)
+    offer = Offers.objects.get(id=offer_id)
+    if request.method == 'GET':
+        return render(request, 'actions/accept.html', context={
+            'user': user,
+            'offer': offer
+        })
+    elif request.method == 'POST':
+        obj = Tasks.objects.get(id=task_id)
+        obj.status = 'in process'
+        obj.save()
 
+        url = f"/account/{user.id}/"
+        return redirect(url)
+
+
+def get_offers(request, user_id, task_id):
+    offers = Offers.objects.filter(task=task_id)
+    return render(request, 'actions/get_offers.html', context={
+        'offers': offers
+    })
