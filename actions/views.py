@@ -1,11 +1,12 @@
-from django.views.decorators.http import require_GET
+from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 
 from actions.add_category_form import AddingForm
 from actions.register_form import RegistrationForm
 from actions.models import User
-from categories.models import Tasks, Categories, Offers
+from categories.models import Tasks, Categories, Offers, Comments
 
 
 def create_task(request):
@@ -56,10 +57,13 @@ def logout_view(request):
 def account(request, user_id):
     amount_of_offers = []
     tasks = Tasks.objects.filter(created_by=user_id)
+    comments = Comments.objects.filter(for_whom=user_id)
+
     for task in tasks:
         amount_of_offers.append((Offers.objects.filter(task=task)).count())
     return render(request, "actions/account.html", context={
-        'tasks': zip(tasks, amount_of_offers)
+        'tasks': zip(tasks, amount_of_offers),
+        'comments': comments
     })
 
 
@@ -92,13 +96,18 @@ def verify_email(request):
 
 def accept(request, user_id, task_id, offer_id):
     user = User.objects.get(id=user_id)
-    offer = Offers.objects.get(id=offer_id)
+
     if request.method == 'GET':
+        offer = Offers.objects.get(id=offer_id)
         return render(request, 'actions/accept.html', context={
             'user': user,
             'offer': offer
         })
     elif request.method == 'POST':
+        offers = Offers.objects.filter(task=task_id)
+        for offer in offers:
+            if offer.id != offer_id:
+                offer.delete()
         obj = Tasks.objects.get(id=task_id)
         obj.status = 'in process'
         obj.save()
@@ -112,3 +121,38 @@ def get_offers(request, user_id, task_id):
     return render(request, 'actions/get_offers.html', context={
         'offers': offers
     })
+
+
+def complete(request, user_id, task_id):
+    if request.method == 'GET':
+        user = User.objects.get(id=user_id)
+        task = Tasks.objects.get(id=task_id)
+        return render(request, 'actions/complete.html', context={
+            'task': task,
+            'user': user
+        })
+    elif request.method == 'POST':
+        task = Tasks.objects.get(id=task_id)
+        offer = Offers.objects.get(task=task_id)
+        if '_complete' in request.POST:
+            task.delete()
+
+        elif '_cancel' in request.POST:
+
+            task.status = 'looking for executor'
+            task.save()
+
+        offer.delete()
+        return render(request, 'actions/feedback.html', context={
+            'offer': offer,
+            'task': task
+        })
+
+
+def feedback(request, user_id, task_id):
+    url = f"/account/{user_id}/"
+    text = request.POST.get('post_text')
+    owner = request.POST.get('post_owner')
+    form = Comments(text=text, from_whom=request.user.id, for_whom=owner)
+    form.save()
+    return redirect(url)

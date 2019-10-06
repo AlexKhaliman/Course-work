@@ -7,21 +7,41 @@
 </head>
 <body>
 {% block content %}
-    Ваши объявления:
+    Ваши объявления
+{%if tasks.count%}
+({{tasks.count}})
+{% endif%}
+:
 <table>
     {% for task, amount in tasks %}
       <tr>
         <td> {{task.name}} </td><td>{{task.price}}</td><td>{{task.status}}</td>
           <td><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
           <td>
-              {% if amount > 0%}
-              <a href="{{task.id}}/offers/">Предложений: {{amount}}</a>
-              {% else %}
-              Предложений нет
-              {% endif%}
+              {% if task.status == 'looking for executor' and amount > 0 %}
+                  <a href="{{task.id}}/offers/">Предложений: {{amount}}</a>
+              {% elif task.status == 'looking for executor' and amount == 0 %}
+                  Предложений нет
+              {% elif task.status == 'in process'%}
+                  <a href="/account/{{task.created_by.id}}/{{task.id}}/complete/">Работа выполнена?
+              {% endif %}
           </td>
       </tr>
     {% endfor %}
+</table>
+    Отзывы
+{% if comments.count%}
+    ({{comments.count}})
+{% else %}
+    Отзывы отсутствуют
+{% endif%} :
+<table>
+    {% for comment in comments%}
+    <tr>
+        <td>{{comment.text}}</td>
+        <td>{{comment.pub_date}}</td>
+    </tr>
+    {% endfor%}
 </table>
 
 {% endblock %}

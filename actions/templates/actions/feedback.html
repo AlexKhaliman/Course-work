@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Feedback</title>
+</head>
+<body>
+Отзыв:
+<form method="post" action="feedback">
+    {% csrf_token %}
+    <input type="hidden" value={{offer.suggested_by.id}} name="post_owner">
+    <input placeholder="Пишите здесь" name="post_text" type="text">
+    <input type="submit" value="Отправить">
+</form>
+
+</body>
+</html>

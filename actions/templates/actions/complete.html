@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Complete</title>
+</head>
+<body>
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value='Принять' name="_complete">
+    <input type="submit" value='Отменить' name="_cancel">
+</form>
+<a href="/account/{{user.id}}/">Вернуться</a>
+</body>
+</html>

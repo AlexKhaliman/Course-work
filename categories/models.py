@@ -42,3 +42,10 @@ class Offers(models.Model):
     task = models.ForeignKey(Tasks, related_name='task', on_delete=models.CASCADE, null=True)
     comment = models.CharField(max_length=500, blank=True, null=True)
     posted_time = models.DateTimeField(auto_now_add=True, blank=True)
+
+
+class Comments(models.Model):
+    for_whom = models.PositiveIntegerField()
+    from_whom = models.PositiveIntegerField()
+    text = models.CharField(max_length=500, null=True)
+    pub_date = models.DateTimeField(auto_now_add=True, blank=True)
