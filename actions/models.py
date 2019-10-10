@@ -42,7 +42,7 @@ class User(AbstractUser):
         self.email_user(
             "Verification Link",
             "<a href={}>Подтвердить почтовый адрес</a>".format(url),
-            "admin@gmail.com"
+            "admin@mail.ru"
         )
 
     def check_key(self, key):

@@ -3,6 +3,11 @@ body {
   background: #f4f4f4;
 }
 
+form {
+    width: 100%;
+    overflow: hidden;
+}
+
 .header {
   background: white;
   height: 50px;
@@ -24,8 +29,11 @@ body {
   height: 70px;
   color: black;
   font-size: 35px;
-  font-family: 'Alegreya', serif;
   padding: 1em;
+  position:absolute;
+  left:0;
+  right:0;
+  bottom:0;
 }
 
 a {
@@ -51,6 +59,37 @@ a:visited {
 
 .join {
   display: flex;
+  padding-top: 12px;
   font-size: 24px;
-  padding-top: 10px
+}
+
+.space {
+    padding: 0 7px 0 7px;
+}
+
+.content {
+    display: flex;
+    justify-content: center
+}
+
+.all_category {
+    margin-top: 20px;
+    font-size: 38px;
+}
+
+.category ul{
+    display:flex;
+    flex-wrap: wrap;
+    margin-left: 150px;
+
+}
+
+.category ul li{
+    list-style: none;
+    flex: 0 0  33.3333%;
+    margin-top: 50px;
+}
+
+.hide {
+    visibility: hidden
 }

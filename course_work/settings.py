@@ -128,7 +128,9 @@ STATICFILES_DIRS = [
     '/var/www/static/',
 ]
 
-EMAIL_HOST = 'smtp@gmail.com'
+EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'admin@gmail.com'
+EMAIL_HOST_USER = 'postmaster@sandbox972131303d4f49e389b5c487fb7daf45.mailgun.org'
+EMAIL_HOST_PASSWORD = 'd7b10dc1b9688a4f0672c9b89e235742-9949a98f-f710b423'
+DEFAULT_FROM_EMAIL = 'admin@mail.ru'

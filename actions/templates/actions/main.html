@@ -2,23 +2,34 @@
 <html lang="en">
     {% load static %}
     <meta charset="UTF-8">
-    <title>Main</title>
+    <title>{% block title%} Main {% endblock %}</title>
         <link href="{%static 'main.css'%}" rel="stylesheet" type="text/css">
 </head>
 <body>
 <header class="header">
     <a href="/"><img src="/static/service.png" alt="Logo" width="100px"></a>
-    <div class="join">
     {% if user.is_authenticated %}
-        <a href="/account/{{user.id}}">Личный кабинет</a>
-        <a href="/logout">Выйты</a>
+        <div class="join">
+            {{user.username}}
+            <div class="space"></div>
+            <a href="/account/{{user.id}}">Личный кабинет</a>
+            <div class="space"></div>
+            <a href="/logout">Выйти</a>
+        </div>
     {% else %}
-        <a href="/login">Войти</a> <div class="or"> или </div>
-        <a href="/register">Зарегистрироваться</a>
+        <div class="join">
+            <a href="/login">Войти</a> <div class="or"> или </div>
+            <a href="/register">Зарегистрироваться</a>
         </div>
     {% endif%}
 </header>
-{% block content %}{% endblock %}
+{% block content %}
+<div class="content">
+    <div class="all_category">
+        <a href="categories/">Просмотерть все категории</a>
+    </div>
+</div>
+{% endblock %}
 <footer class="footer">
     Контакты
 </footer>

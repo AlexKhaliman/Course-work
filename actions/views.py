@@ -1,7 +1,7 @@
 from django.views.decorators.http import require_GET, require_POST
 from django.contrib.auth import login, authenticate, logout
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from actions.add_category_form import AddingForm
 from actions.register_form import RegistrationForm
@@ -10,13 +10,17 @@ from categories.models import Tasks, Categories, Offers, Comments
 
 
 def create_task(request):
-
+    categories = Categories.objects.all()
     if request.method == 'GET':
         return render(request, 'actions/add_task.html', context={
-            'form': AddingForm(initial={'created_by': request.user.id})
+            'categories': categories
         })
 
     elif request.method == 'POST':
+        request.POST = request.POST.copy()
+        request.POST['created_by'] = request.user.id
+        category_id = request.POST['category']
+        request.POST['category'] = Categories.objects.get(id=category_id).id
         form = AddingForm(request.POST)
         if form.is_valid():
             form.save()
@@ -78,10 +82,7 @@ def register(request):
             user.verify_email()
             return render(request, "actions/check_email.html")
     else:
-        form = RegistrationForm()
-    return render(request, "actions/register.html", context={
-        "form": form
-    })
+        return render(request, "actions/register.html")
 
 
 @require_GET

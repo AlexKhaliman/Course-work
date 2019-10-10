@@ -1,15 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>categories</title>
 {% extends "actions/main.html" %}
-</head>
-<body>
+
+{% block title %} Categories {% endblock %}
+
 {% block content %}
-    {%for category in categories%}
-        <a href="/categories/{{category.id}}/"><img src="/{{ category.picture }}" width="400"></a>
-    {%endfor%}
+        <div class="category">
+        <ul>
+            {% for category in categories%}
+                <li><a href="/categories/{{category.id}}/"><img src="/{{ category.picture }}" width="100px"
+                                                                alt="{{category.category}}">
+                    {{category.category}}</a>
+                </li>
+            {%endfor%}
+        </ul>
+        </div>
 {% endblock %}
-</body>
-</html>
+

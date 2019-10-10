@@ -1,23 +1,42 @@
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>creating</title>
+    <link href="{%static 'form.css'%}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form method="POST" action="/creating/">
+
+<div id="form-main">
+  <div id="form-div">
+    <form class="form" id="form1" method="post">
         {% csrf_token %}
-        <style>
-        .hide {visibility: hidden;}
-        </style>
-            <div class="hide">
-        {{ form.created_by }}
-            </div>
-        name: {{ form.name }}
-        price: {{ form.price }}
-        category: {{ form.category }}
-        comments: {{ form.comments }}
-    <input type="submit">
+      <p>
+        <input name="name" type="text" class="validate[required,custom[onlyLetter],length[0,100]] feedback-input" placeholder="Мне нужно ..." />
+      </p>
+
+      <p>
+        <input name="price" type="text" class="validate[required,custom[email]] feedback-input" placeholder="Цена" />
+      </p>
+      <p>
+        <select name="category" class="feedback-input">
+            {% for category in categories%}
+            <option value={{category.id}}> {{ category}}</option>
+            {% endfor%}
+        </select>
+      </p>
+      <p>
+        <textarea name="comments" class="validate[required,length[6,300]] feedback-input" placeholder="Пожелания и детали"></textarea>
+      </p>
+
+      <div class="submit">
+        <input type="submit" value="Создать" id="button-blue"/>
+        <div class="ease"></div>
+      </div>
     </form>
-</body>
-</html>
+  </div>
+
+
+

@@ -1,17 +1,25 @@
-{% extends "actions/main.html" %}
-{% block content%}
-<h1>Вход</h1>
-<div class="big-card login-form">
-    <form method="POST">
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link href="{%static 'form.css'%}" rel="stylesheet" type="text/css">
+<body>
+<div id="form-main">
+  <div id="form-div">
+    <form class="form" id="form1" method="post">
         {% csrf_token %}
-        {% if error %}
-            <div class="error">Something went wrong</div>
-        {% endif %}
+        <p>
+            <input placeholder="Username" name="username" type="text" class="feedback-input">
+        </p>
+        <p>
+            <input placeholder="Password" name="password" type="password" class="feedback-input">
+        </p>
 
-        <input placeholder="Username" name="username" type="text" class="text-input">
-        <input placeholder="Password" name="password" type="password" class="text-input">
-
-        <input type="submit" class="submit-btn">
+      <div class="submit">
+        <input type="submit" value="Войти" id="button-blue"/>
+        <div class="ease"></div>
+      </div>
     </form>
-    {% endblock %}
-</div>
+  </div>
+</body>
