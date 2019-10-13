@@ -1,49 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>account</title>
     {% extends "actions/main.html" %}
+    {% load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
+    <title>Account</title>
 </head>
+<div id="background">
 <body>
+
 {% block content %}
-    Ваши объявления
-{%if tasks.count%}
-({{tasks.count}})
-{% endif%}
-:
-<table>
+
+{% if amount_of_tasks > 0%}
+<div class="table-title">
+    <h3>Объявления ({{amount_of_tasks}})
+    </h3>
+</div>
+<table class="table-fill">
+    <thead>
+    <tr>
+        <th class="text-left">Нужно</th>
+        <th class="text-left">Цена</th>
+        <th class="text-left">Статус</th>
+        <th class="text-left">Опубликовано</th>
+        <th class="text-left">Предложения</th>
+        <th class="text-left"></th>
+    </tr>
+    </thead>
+    <tbody class="table-hover">
     {% for task, amount in tasks %}
       <tr>
-        <td> {{task.name}} </td><td>{{task.price}}</td><td>{{task.status}}</td>
-          <td><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
+        <td class="text-left"> {{task.name}} </td>
+          <td class="text-left">{{task.price}}</td>
+          <td class="text-left">{{task.status}}</td>
+          <td class="text-left">{{task.pub_date}}</td>
           <td>
               {% if task.status == 'looking for executor' and amount > 0 %}
                   <a href="{{task.id}}/offers/">Предложений: {{amount}}</a>
               {% elif task.status == 'looking for executor' and amount == 0 %}
                   Предложений нет
               {% elif task.status == 'in process'%}
-                  <a href="/account/{{task.created_by.id}}/{{task.id}}/complete/">Работа выполнена?
+              <a href="/account/{{task.created_by.id}}/{{task.id}}/complete/">Работа выполнена?</a>
               {% endif %}
           </td>
+          <td class="text-left"><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
       </tr>
     {% endfor %}
+    </tbody>
 </table>
-    Отзывы
-{% if comments.count%}
-    ({{comments.count}})
 {% else %}
-    Отзывы отсутствуют
-{% endif%} :
-<table>
+Объявлений нет.
+{% endif%}
+<br>
+{% if amount_of_comments > 0 %}
+<div class="table-title">
+<h3>
+    Отзывы ({{ amount_of_comments }})
+</h3>
+</div>
+<table class="table-fill">
+        <thead>
+    <tr>
+        <th class="text-left">Комментарий</th>
+        <th class="text-left">Отправлено</th>
+    </tr>
+    </thead>
     {% for comment in comments%}
     <tr>
-        <td>{{comment.text}}</td>
-        <td>{{comment.pub_date}}</td>
+        <td class="text-left">{{comment.text}}</td>
+        <td class="text-left">{{comment.pub_date}}</td>
     </tr>
     {% endfor%}
 </table>
-
+{% else %}
+    Отзывы отсутствуют
+{% endif%}
 {% endblock %}
+</div>
 </body>
 </html>

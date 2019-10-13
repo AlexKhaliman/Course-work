@@ -3,9 +3,9 @@
     {% load static %}
     <meta charset="UTF-8">
     <title>{% block title%} Main {% endblock %}</title>
-        <link href="{%static 'main.css'%}" rel="stylesheet" type="text/css">
-</head>
-<body>
+    <link href="{%static 'main.css'%}" rel="stylesheet" type="text/css">
+    </head>
+<body id="background">
 <header class="header">
     <a href="/"><img src="/static/service.png" alt="Logo" width="100px"></a>
     {% if user.is_authenticated %}
