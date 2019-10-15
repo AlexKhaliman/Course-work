@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome</title>
-    {% extends "actions/main.html" %}
-</head>
-<body>
-
-</body>
-</html>
+{% extends "actions/main.html" %}
+{% block title %} Welcome {% endblock%}
+{% block content %}
+<div class="content1">
+        <a href="categories/">Просмотерть все категории</a>
+</div>
+{% endblock %}

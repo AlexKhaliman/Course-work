@@ -1,9 +1,7 @@
 {% extends "actions/main.html" %}
-
 {% block title %} Categories {% endblock %}
-
 {% block content %}
-        <div class="category">
+<div class="content>">
         <ul>
             {% for category in categories%}
                 <li><a href="/categories/{{category.id}}/"><img src="/{{ category.picture }}" width="100px"
@@ -12,6 +10,6 @@
                 </li>
             {%endfor%}
         </ul>
-        </div>
+</div>
 {% endblock %}
 

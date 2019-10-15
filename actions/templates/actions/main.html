@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-    {% load static %}
+    <head>
     <meta charset="UTF-8">
-    <title>{% block title%} Main {% endblock %}</title>
-    <link href="{%static 'main.css'%}" rel="stylesheet" type="text/css">
+    <title>{% block title%} Welcome {% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/main.css">
     </head>
-<body id="background">
-<header class="header">
-    <a href="/"><img src="/static/service.png" alt="Logo" width="100px"></a>
-    {% if user.is_authenticated %}
-        <div class="join">
-            {{user.username}}
-            <div class="space"></div>
-            <a href="/account/{{user.id}}">Личный кабинет</a>
-            <div class="space"></div>
-            <a href="/logout">Выйти</a>
-        </div>
-    {% else %}
-        <div class="join">
-            <a href="/login">Войти</a> <div class="or"> или </div>
-            <a href="/register">Зарегистрироваться</a>
-        </div>
-    {% endif%}
-</header>
-{% block content %}
-<div class="content">
-    <div class="all_category">
-        <a href="categories/">Просмотерть все категории</a>
+<body>
+
+<nav class="navbar navbar-expand-lg header">
+    <a class="navbar-brand" href="/"><img src="/static/service.png" alt="Logo" width="100px"></a>
+        {% if user.is_authenticated %}
+    <div class="to_the_right">
+   <div class="dropdown dropleft">
+  <div class="dropdown">
+    <button type="button" class="btn btn-outline-primary btn-lg dropdown-toggle" data-toggle="dropdown">
+      {{user.username}}
+    </button>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="/account/{{user.id}}">Личный кабинет</a>
+      <a class="dropdown-item" href="/logout">Выйти</a>
     </div>
-</div>
-{% endblock %}
+  </div>
+   </div>
+    </div>
+        {% else %}
+        <div class="to_the_right">
+            <h3><a href="/login">Войти</a> <div class="small">или</div>
+            <a href="/register">Зарегистрироваться</a></h3>
+    </div>
+    {% endif%}
+</nav>
+{% block content%}
+<div class="content"></div>
+{% endblock%}
 <footer class="footer">
     Контакты
 </footer>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

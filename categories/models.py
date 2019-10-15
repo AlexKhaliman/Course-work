@@ -49,3 +49,4 @@ class Comments(models.Model):
     from_whom = models.PositiveIntegerField()
     text = models.CharField(max_length=500, null=True)
     pub_date = models.DateTimeField(auto_now_add=True, blank=True)
+    is_positive = models.BooleanField()

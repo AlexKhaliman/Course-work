@@ -9,11 +9,15 @@
 <body>
 
 {% block content %}
+<div class="un_list">
 <ul>
-    <li>{{ task.name }}</li>
-    <li>{{ task.price }}</li>
-    <li>{{ task.comments }}</li>
+    <li>Нужно: {{ task.name }}</li>
+    <li>Цена: {{ task.price }}</li>
+    <li>Дата создания: {{task.pub_date}}</li>
+    <li>Создано кем: {{task.created_by}}</li>
+    <li>Подробнее: {{ task.comments }}</li>
 </ul>
+</div>
 <a href="to_respond/">Откликнуться!</a>
 <a href="/categories/{{task.category.id}}/">Вернуться</a>
 {% endblock %}

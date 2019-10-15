@@ -1,0 +1,26 @@
+{% extends "actions/main.html" %}
+{% block title%} Comments {% endblock %}
+{% block content %}
+<table class="table-fill">
+        <thead>
+    <tr>
+        <th class="text-left">Комментарий</th>
+        <th>Тип</th>
+        <th class="text-left">Отправлено</th>
+    </tr>
+    </thead>
+    {% for comment in comments%}
+    <tr>
+        <td class="text-left">{{comment.text}}</td>
+        <td class="text-left">{% if comments.is_positive%}
+                                Положительный
+                                {% else%}
+                                Отрицательный
+                                {% endif %}
+        </td>
+        <td class="text-left">{{comment.pub_date}}</td>
+    </tr>
+    {% endfor%}
+</table>
+<a href="/account/{{ user.id }}">Вернуться</a>
+{% endblock %}

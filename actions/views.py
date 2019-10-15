@@ -62,16 +62,22 @@ def account(request, user_id):
     amount_of_offers = []
     tasks = Tasks.objects.filter(created_by=user_id)
     comments = Comments.objects.filter(for_whom=user_id)
-    amount_of_tasks = Tasks.objects.filter(created_by=user_id).count()
-    amount_of_comments = Comments.objects.filter(for_whom=user_id).count()
+    pos_comments = [i for i in comments if i.is_positive==True]
 
     for task in tasks:
         amount_of_offers.append((Offers.objects.filter(task=task)).count())
     return render(request, "actions/account.html", context={
         'tasks': zip(tasks, amount_of_offers),
         'comments': comments,
-        'amount_of_tasks': amount_of_tasks,
-        'amount_of_comments': amount_of_comments
+        'pos_comments': pos_comments,
+        'neg_comments': len(comments) - len(pos_comments)
+    })
+
+
+def comments(request, user_id):
+    comments = Comments.objects.filter(for_whom=user_id)
+    return render(request, 'actions/comments.html', context={
+        'comments': comments
     })
 
 

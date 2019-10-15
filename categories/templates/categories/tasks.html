@@ -8,11 +8,26 @@
 <body>
 {% block content %}
 {%if tasks|length > 0%}
-    <ul>
-        {%for task in tasks%}
-        <li> {{task.name}} {{task.price}} создано:{{ task.pub_date}} <a href="/categories/{{category_id}}/{{task.id}}"> подробнее...</a> </li>
-        {% endfor %}
-    </ul>
+    <table class="table-fill">
+        <thead>
+            <tr>
+                <th>Нужно</th>
+                <th>Цена</th>
+                <th>Создано</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="table-hover">
+            {% for task in tasks %}
+            <tr>
+                <td>{{task.name}}</td>
+                <td>{{task.price}}</td>
+                <td>{{task.pub_date}}</td>
+                <td><a href="/categories/{{category_id}}/{{task.id}}"> подробнее...</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {%else%}
     Объявлений нет
 {% endif%}
