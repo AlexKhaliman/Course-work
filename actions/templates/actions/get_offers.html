@@ -1,14 +1,29 @@
 {% extends "actions/main.html" %}
+{% block title%} Offers {% endblock %}
 {% block content%}
-
-<table>
+<table class="table table-hover">
+    <thead class="table-borderless">
+    <tr>
+        <th>Предложено кем</th>
+        <th>Комментарий</th>
+        <th>Отправлено</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
     {% for offer in offers%}
     <tr>
         <td>{{ offer.suggested_by }}</td>
         <td>{{ offer.comment }}</td>
         <td>{{ offer.posted_time }}</td>
-        <td><a href="{{ offer.id }}">Принять!</a></td>
+        <td>
+            <form method="POST" action="{{ offer.id}}/">
+                {% csrf_token %}
+            <button type="submit" class="btn btn-outline-primary" name="offer">Принять!</button>
+            </form>
+        </td>
     </tr>
     {% endfor%}
+    </tbody>
 </table>
-{% endblock %}
+{% endblock%}

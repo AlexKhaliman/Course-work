@@ -5,27 +5,25 @@ body {
   height: 100%; /* needed for container min-height */
 }
 
+footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: linear-gradient(#ffffff, #8ddbf7);
+  height: 120px;
+
+}
+
 .to_the_right{
     padding-left: 900px;
 }
 
 .header {
-    background: linear-gradient(#8ddbf7, #f0fbff);
+    background: linear-gradient(#8ddbf7, #ffffff);
     height: 120px;
 }
 
-.footer {
-    background: linear-gradient(#f0fbff, #8ddbf7);
-    height: 120px;
-}
-
-.content1 {
+.content {
   position: relative; /* needed for footer positioning*/
   height: auto !important; /* real browsers */
-  min-height: 100%; /* real browsers */
-
-.footer {
-  position: absolute;
-  width: 70%;
-  bottom: 0;
-}
+  min-height: 70%; /* real browsers */

@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>tasks</title>
-    {% extends "actions/main.html" %}
-</head>
-<body>
+{% extends "actions/main.html" %}
+{% block title %} Tasks{% endblock %}
 {% block content %}
 {%if tasks|length > 0%}
-    <table class="table-fill">
-        <thead>
+<br>
+    <table class="table table-hover">
+        <thead class="table-borderless">
             <tr>
                 <th>Нужно</th>
                 <th>Цена</th>
@@ -17,21 +12,22 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody class="table-hover">
+        <tbody>
             {% for task in tasks %}
             <tr>
                 <td>{{task.name}}</td>
                 <td>{{task.price}}</td>
                 <td>{{task.pub_date}}</td>
-                <td><a href="/categories/{{category_id}}/{{task.id}}"> подробнее...</a></td>
+                <td><a href="/categories/{{category.id}}/{{task.id}}/"> подробнее...</a></td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 {%else%}
-    Объявлений нет
+<br>
+<h1 class="text-center">В категории "{{category}}" объявлений нет</h1>
 {% endif%}
-<a href="/creating/">Добавить объявление</a>
+<a href="/creating/">
+<button type="button" class="btn btn-primary btn-block">Добавить объявление</button>
+</a>
 {% endblock %}
-</body>
-</html>

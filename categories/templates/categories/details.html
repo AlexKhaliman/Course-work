@@ -1,25 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>details</title>
-    {% extends "actions/main.html" %}
-
-</head>
-<body>
-
+{% extends "actions/main.html" %}
+{% block title%}Details {% endblock %}
 {% block content %}
-<div class="un_list">
-<ul>
-    <li>Нужно: {{ task.name }}</li>
-    <li>Цена: {{ task.price }}</li>
-    <li>Дата создания: {{task.pub_date}}</li>
-    <li>Создано кем: {{task.created_by}}</li>
-    <li>Подробнее: {{ task.comments }}</li>
+<br>
+<div class="container">
+    <h4>
+<ul class="list-group border-0">
+    <li class="list-group-item border-0"><span class="badge badge-info">Нужно:
+    </span> {{ task.name }}</li>
+    <li class="list-group-item border-0"><span class="badge badge-info">Цена:
+    </span> {{ task.price }}</li>
+    <li class="list-group-item border-0"><span class="badge badge-info">Дата создания:
+    </span> {{task.pub_date}}</li>
+    <li class="list-group-item border-0" ><span class="badge badge-info">Создано кем:
+    </span> {{task.created_by}}</li>
+    <li class="list-group-item border-0"><span class="badge badge-info ">Подробнее:
+    </span> {{ task.comments }}
+    </li>
 </ul>
+    </h4>
+<div class="btn-group btn-group-justified">
+  <a href="to_respond/" class="btn btn-primary btn-lg">Откликнуться!</a>
+  <a href="/categories/{{task.category.id}}/" class="btn btn-primary btn-lg ">Вернуться</a>
 </div>
-<a href="to_respond/">Откликнуться!</a>
-<a href="/categories/{{task.category.id}}/">Вернуться</a>
+</div>
 {% endblock %}
-</body>
-</html>

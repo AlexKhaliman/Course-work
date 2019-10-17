@@ -1,21 +1,27 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Respond</title>
+    <link href="{%static 'form.css'%}" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <form method="POST">
+<div id="form-main">
+  <div id="form-div">
+    <form method="post">
         {% csrf_token %}
-        <style>
-            .hide {visibility: hidden}
-        </style>
-            <div class="hide">
-                {{ form.suggested_by }}
-                {{form.task}}
-            </div>
-        Комментарий: {{form.comment}}
-    <input type="submit">
+        <p>
+        <textarea name="comment" class="validate[required,length[6,300]] feedback-input"
+                  placeholder="Заполните поле, чтобы заинтересовать работодателя"></textarea>
+      </p>
+      <div class="submit">
+        <input type="submit" value="Отправить!" id="button-blue"/>
+        <div class="ease"></div>
+      </div>
     </form>
+  </div>
+
 </body>
 </html>

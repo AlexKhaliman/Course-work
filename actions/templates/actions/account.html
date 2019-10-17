@@ -1,64 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% extends "actions/main.html" %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0; maximum-scale=1.0; width=device-width;">
-    <title>Account</title>
-</head>
-<div id="background">
-<body>
-
+{% extends "actions/main.html" %}
+{% block title%} Account {% endblock %}
 {% block content %}
-
-{% if tasks|length > 0%}
-<div class="table-title">
-    <h3>Объявления ({{tasks|length}})
+<br>
+{% if num > 0%}
+    <h3>Объявления ({{ num }})
     </h3>
-</div>
-<table class="table-fill">
-    <thead>
+<table class="table table-hover">
+    <thead class="table-borderless">
     <tr>
-        <th class="text-left">Нужно</th>
-        <th class="text-left">Цена</th>
-        <th class="text-left">Статус</th>
-        <th class="text-left">Опубликовано</th>
-        <th class="text-left">Предложения</th>
-        <th class="text-left"></th>
+        <th>Нужно</th>
+        <th>Цена</th>
+        <th>Статус</th>
+        <th>Опубликовано</th>
+        <th>Предложения</th>
     </tr>
     </thead>
-    <tbody class="table-hover">
+    <tbody>
     {% for task, amount in tasks %}
       <tr>
         <td> {{task.name}} </td>
-          <td class="text-left">{{task.price}}</td>
-          <td class="text-left">{{task.status}}</td>
-          <td class="text-left">{{task.pub_date}}</td>
+          <td>{{task.price}}</td>
+          <td>{{task.status}}</td>
+          <td>{{task.pub_date}}</td>
           <td>
               {% if task.status == 'looking for executor' and amount > 0 %}
-                  <a href="{{task.id}}/offers/">Предложений: {{amount}}</a>
+                  <a href="{{task.id}}/offers/"><button type="button" class="btn btn-primary">
+  Предложений <span class="badge badge-light">{{ amount }}</span>
+</button></a>
               {% elif task.status == 'looking for executor' and amount == 0 %}
                   Предложений нет
               {% elif task.status == 'in process'%}
-              <a href="/account/{{task.created_by.id}}/{{task.id}}/complete/">Работа выполнена?</a>
+<form method="POST" action="{{task.id}}/complete/">
+    {% csrf_token %}
+    <div class="btn-group">
+        <button type="submit" name='_complete' class="btn btn-primary">Принять</button>
+        <button type="submit" name="_cancel" class="btn btn-primary">Отменить</button>
+    </div>
+</form>
+
               {% endif %}
           </td>
-          <td class="text-left"><a href="/categories/{{task.category.id}}/{{task.id}}">Перейти</a></td>
       </tr>
     {% endfor %}
     </tbody>
 </table>
 {% else %}
-<div class="table-title">
     <h3>Объявлений нет
     </h3>
-</div>
 {% endif%}
+<br>
+<div class="container">
+<h4>
 Положительных отзывов: {{ pos_comments|length}}
 <br>
 Отрицательных отзывов: {{ neg_comments }}
-<a href="comments">Просмотреть</a>
+</h4>
+<a href="comments"><button type="button" class="btn btn-primary btn-lg">Просмотреть</button></a>
+    </div>
 {% endblock %}
-</div>
-</body>
-</html>

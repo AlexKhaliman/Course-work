@@ -14,11 +14,11 @@ def get_categories(request):
 
 
 def get_tasks(request, category_id):
-    cat = Categories.objects.get(id=category_id)
-    tasks = Tasks.objects.filter(category=cat)
+    category = Categories.objects.get(id=category_id)
+    tasks = Tasks.objects.filter(category=category)
     return render(request, 'categories/tasks.html', context={
         'tasks': tasks,
-        'category_id': category_id,
+        'category': category,
     })
 
 
@@ -28,16 +28,13 @@ def get_details(request, category_id, task_id):
 
 
 def to_respond(request, category_id, task_id):
+    task = Tasks.objects.get(id=task_id)
     if request.method == 'GET':
-        task = Tasks.objects.get(id=task_id)
-        print(request.user.id)
-        return render(request, 'categories/to_respond.html', context={
-            'form': RespondForm(initial={
-                'suggested_by': request.user.id,
-                'task': task.id
-            })
-        })
+        return render(request, 'categories/to_respond.html')
     elif request.method == 'POST':
+        request.POST = request.POST.copy()
+        request.POST['suggested_by'] = request.user.id
+        request.POST['task'] = task.id
         form = RespondForm(request.POST)
         if form.is_valid():
             form.save()

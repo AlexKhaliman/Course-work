@@ -1,24 +1,24 @@
 {% extends "actions/main.html" %}
 {% block title%} Comments {% endblock %}
 {% block content %}
-<table class="table-fill">
-        <thead>
+<table class="table table-hover">
+        <thead class="table-borderless">
     <tr>
-        <th class="text-left">Комментарий</th>
+        <th>Комментарий</th>
         <th>Тип</th>
-        <th class="text-left">Отправлено</th>
+        <th>Отправлено</th>
     </tr>
     </thead>
     {% for comment in comments%}
     <tr>
-        <td class="text-left">{{comment.text}}</td>
-        <td class="text-left">{% if comments.is_positive%}
+        <td>{{comment.text}}</td>
+        <td>{% if comment.is_positive%}
                                 Положительный
                                 {% else%}
                                 Отрицательный
                                 {% endif %}
         </td>
-        <td class="text-left">{{comment.pub_date}}</td>
+        <td>{{comment.pub_date}}</td>
     </tr>
     {% endfor%}
 </table>

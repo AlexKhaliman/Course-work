@@ -1,17 +1,26 @@
+{% load static%}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Feedback</title>
+    <title>Creating</title>
+    <link href="{%static 'form.css'%}" rel="stylesheet" type="text/css">
 </head>
 <body>
-Отзыв:
-<form method="post" action="feedback">
-    {% csrf_token %}
-    <input type="hidden" value={{offer.suggested_by.id}} name="post_owner">
-    <input placeholder="Пишите здесь" name="post_text" type="text">
-    <input type="submit" value="Отправить">
-</form>
 
-</body>
-</html>
+<div id="form-main">
+  <div id="form-div">
+    <form method="POST" action="feedback/">
+        {% csrf_token %}
+        <input type="hidden" value={{offer.suggested_by.id}} name="post_owner">
+        <p>
+        <textarea name="text" class="validate[required,length[6,300]] feedback-input" placeholder="Оставьте комментарий"></textarea>
+      </p><span class="right">
+        <input type="image" name="_like" src="/static/img/like.png" width="75" alt="like" class="image" ><span class="right">
+        <input type="image" name="_dislike" src="/static/img/dislike.png" width="75" alt="dislike" class="image">
+            </span>
+            </span>
+    </form>
+  </div>
+</div>

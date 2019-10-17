@@ -128,3 +128,11 @@ input:focus, textarea:focus {
 		padding-right: 3%;
 	}
 }
+
+.image:hover {
+    background: inherit;
+}
+
+.right{
+    padding-left: 90px;
+}
