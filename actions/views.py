@@ -51,7 +51,6 @@ def login_view(request):
         )
         if user is not None:
             login(request, user)
-            print(request.GET.get('next'))
             return redirect('/')
         else:
             return render(request, "actions/login.html", context={

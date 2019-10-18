@@ -15,7 +15,7 @@
         {% csrf_token %}
         <input type="hidden" value={{offer.suggested_by.id}} name="post_owner">
         <p>
-        <textarea name="text" class="validate[required,length[6,300]] feedback-input" placeholder="Оставьте комментарий"></textarea>
+        <textarea name="post_text" class="validate[required,length[6,300]] feedback-input" placeholder="Оставьте комментарий"></textarea>
       </p><span class="right">
         <input type="image" name="_like" src="/static/img/like.png" width="75" alt="like" class="image" ><span class="right">
         <input type="image" name="_dislike" src="/static/img/dislike.png" width="75" alt="dislike" class="image">
