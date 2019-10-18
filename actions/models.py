@@ -20,7 +20,6 @@ class User(AbstractUser):
     )
     is_email_verified = models.BooleanField(default=False)
     verification_email_sent_at = models.DateTimeField(null=True)
-    incorrect_attempts = models.PositiveSmallIntegerField(default=0)
     initial_secret_key = models.CharField(max_length=256)
 
     def generate_key(self):

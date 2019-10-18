@@ -29,7 +29,7 @@ def get_details(request, category_id, task_id):
 
 def to_respond(request, category_id, task_id):
     task = Tasks.objects.get(id=task_id)
-    if request.method == 'GET':
+    if request.method == 'GET' and request.user.is_authenticated:
         return render(request, 'categories/to_respond.html')
     elif request.method == 'POST':
         request.POST = request.POST.copy()
@@ -39,6 +39,7 @@ def to_respond(request, category_id, task_id):
         if form.is_valid():
             form.save()
             return redirect('/')
-
+    else:
+        return redirect('/error/')
 
 

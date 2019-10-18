@@ -9,9 +9,13 @@ from actions.models import User
 from categories.models import Tasks, Categories, Offers, Comments
 
 
+def error(request):
+    return render(request, 'actions/error.html')
+
+
 def create_task(request):
     categories = Categories.objects.all()
-    if request.method == 'GET':
+    if request.method == 'GET' and request.user.is_authenticated:
         return render(request, 'actions/add_task.html', context={
             'categories': categories
         })
@@ -25,6 +29,8 @@ def create_task(request):
         if form.is_valid():
             form.save()
         return redirect('/')
+    else:
+        return redirect('/error')
 
 
 def welcome(request):
