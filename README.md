@@ -5,7 +5,7 @@ At your service - сервис для нахожденя исполнителе�
 1. Клонировать Git репозиторий: *git clone git@<span></span>github.com:AlexKhaliman/Course-work.git*
 2. Создать виртуальное окружение:
 
-*virtualenv \*venv_name\*
+*virtualenv \*venv_name\**
 
 *source \*venv_name\*/bin/activate*
 
