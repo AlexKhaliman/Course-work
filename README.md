@@ -25,4 +25,5 @@ At your service - сервис для нахождения исполнител�
 - [Entity Relationship](https://github.com/AlexKhaliman/Course-work/blob/master/diagrams/ERD%20.png)
 - [Use Case](https://github.com/AlexKhaliman/Course-work/blob/master/diagrams/UCD.png)
 - [Sequence](https://github.com/AlexKhaliman/Course-work/blob/master/diagrams/sequences.png)
+
 Для обратной связи пишите на khalimantsevich174@mail.ru
